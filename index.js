@@ -13,7 +13,10 @@ if (!VERIFY_TOKEN)  {
   console.log('missing verify token! exiting')
   // i know this is bad nodejs, go fuck yourself
   process.exit() 
+} else {
+  console.log('verify token is ', VERIFY_TOKEN)
 }
+
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
