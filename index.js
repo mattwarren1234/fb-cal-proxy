@@ -4,15 +4,22 @@
 const
   express = require('express'),
   bodyParser = require('body-parser'),
-  config = require('./config.json'),
+  // config = require('./config.json'),
   app = express().use(bodyParser.json()); // creates express http server
+
+// let VERIFY_TOKEN = config.VERIFY_TOKEN || process.env.VERIFY_TOKEN
+let VERIFY_TOKEN = process.env.VERIFY_TOKEN
+if (!VERIFY_TOKEN)  {
+  console.log('missing verify token! exiting')
+  // i know this is bad nodejs, go fuck yourself
+  process.exit() 
+}
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
-  let VERIFY_TOKEN = config.VERIFY_TOKEN
-    
+
   // Parse the query params
   let mode = req.query['hub.mode'];
   let token = req.query['hub.verify_token'];
