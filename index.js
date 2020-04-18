@@ -60,6 +60,7 @@ app.post('/webhook', (req, res) => {
       // will only ever contain one message, so we get index 0
       if (entry.messaging) {
         let webhook_event = entry.messaging[0];
+        console.log(webhook_event);
       } else {
         // absolutely fuck loosely typed languages. what is this, a framework for ants
         if (entry.field && entry.value){
@@ -69,7 +70,6 @@ app.post('/webhook', (req, res) => {
           }
         }
       }
-      console.log(webhook_event);
     });
 
     // Returns a '200 OK' response to all requests
